@@ -20,11 +20,11 @@ $ composer require daht/request-md5-signature
 ```php
 <?php
 
-use Daht\RequestMd5Signature;
+use Daht\RequestMd5Signature\Md5Signature;
 $param = [
     "user_name"=>'daht'
 ];
-$md5Signature= new Md5Signature('you app secret');
+$md5Signature= new Md5Signature('you app secret','you sign key');
 if(!$md5Signature->verify($param)){
     return $md5Signature->getErrorMessage();
 }
