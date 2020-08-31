@@ -9,7 +9,7 @@
 	}],
 	"autoload": {
 		"psr-4": {
-			"Daht\\RequestMd5Signature": "src/"
+			"Daht\\RequestMd5Signature\\": "src/"
 		}
 	},
 	"require": {
