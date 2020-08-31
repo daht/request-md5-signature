@@ -24,7 +24,15 @@ use Daht\RequestMd5Signature\Md5Signature;
 $param = [
     "user_name"=>'daht'
 ];
+
 $md5Signature= new Md5Signature('you app secret','you sign key');
+
+
+//生成sign
+$sign = $md5Signature->generate($param);
+
+
+//验证sign
 if(!$md5Signature->verify($param)){
     return $md5Signature->getErrorMessage();
 }
