@@ -7,6 +7,7 @@ class Md5Signature
     private $appSecret = "";
     private $signKey = "";
     private $errorMessage = "";
+    private $generateSign = "";
 
 
     function __construct($appSecret = "", $signKey = 'sign')
@@ -15,7 +16,12 @@ class Md5Signature
         $this->signKey = $signKey;
     }
 
-    public function verify($params = [])
+    public function getGenerateSign(): string
+    {
+        return $this->generateSign;
+    }
+
+    public function verify($params = []): bool
     {
 
         if (!isset($params[$this->signKey])) {
@@ -24,20 +30,21 @@ class Md5Signature
         }
         $sign = $params[$this->signKey];
         unset($params[$this->signKey]);
-        if ($sign !== $this->generate($params)) {
+        $this->generateSign = $this->generate($params);
+        if ($sign !== $this->generateSign) {
             $this->errorMessage = " signature verify failed ";
             return false;
         }
         return true;
     }
 
-    function generate($params = [])
+    private function generate($params = []): string
     {
         ksort($params);
         return md5(http_build_query($params) . "appSecret=" . $this->appSecret);
     }
 
-    function getErrorMessage()
+    function getErrorMessage(): string
     {
         return $this->errorMessage;
     }
