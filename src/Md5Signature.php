@@ -16,12 +16,12 @@ class Md5Signature
         $this->signKey = $signKey;
     }
 
-    public function getGenerateSign(): string
+    public function getGenerateSign()
     {
         return $this->generateSign;
     }
 
-    public function verify($params = []): bool
+    public function verify($params = [])
     {
 
         if (!isset($params[$this->signKey])) {
@@ -38,13 +38,13 @@ class Md5Signature
         return true;
     }
 
-    private function generate($params = []): string
+    private function generate($params = [])
     {
         ksort($params);
         return md5(http_build_query($params) . "appSecret=" . $this->appSecret);
     }
 
-    function getErrorMessage(): string
+    function getErrorMessage()
     {
         return $this->errorMessage;
     }
