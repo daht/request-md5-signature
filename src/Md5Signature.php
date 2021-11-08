@@ -38,7 +38,7 @@ class Md5Signature
         return true;
     }
 
-    private function generate($params = [])
+    public function generate($params = [])
     {
         ksort($params);
         return md5(http_build_query($params) . "appSecret=" . $this->appSecret);
