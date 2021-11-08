@@ -33,8 +33,8 @@ class Md5Signature
 
     function generate($params = [])
     {
-        $sign = md5(http_build_query(ksort($params)) . "appSecret=" . $this->appSecret);
-        return $sign;
+        ksort($params);
+        return md5(http_build_query($params) . "appSecret=" . $this->appSecret);
     }
 
     function getErrorMessage()
